@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import UploadForm from "./upload";
 import "./view.css";
+const url = process.env.REACT_APP_API_URL;
 
 class upload extends Component {
     render() {
+        console.log(url);
         return (
             <div className="upload">
                 <div className="view">
                     <div className="v video">
-                        <iframe width="450" height="300" src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
+                        <iframe width="450" height="300" src="http://localhost:4000/video/videoplayback.webm"></iframe>
                     </div>
                     <div className="v imgtracking">
                         <img width="450" height="300" src="https://ar-bdu.herokuapp.com/image/oldsv.png"></img>

@@ -1,0 +1,16 @@
+upload method: post
+    uploadvideo: localhost:4000/upload/video
+    uploadImage: localhost:4000/upload/image
+getconten method: get
+    get link dowload nft file: localhost:4000/nft/:name
+    get image: localhost:4000/image
+    get video on server: localhost:4000/video
+    get all video asset on server: http://localhost:4000/getcontent/videoasset
+    get all image asset on server: http://localhost:4000/getcontent/imgasset
+toa database
+CREATE TABLE `ar_database`.`groups` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `ar_database`.`images` ( `id` INT NOT NULL AUTO_INCREMENT , `name` TEXT NOT NULL , `link_img` TEXT NOT NULL , `link_nft` TEXT NOT NULL , `id_group` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `ar_database`.`contens` ( `id` INT NOT NULL AUTO_INCREMENT , `name` TEXT NOT NULL , `link_conten` TEXT NOT NULL , `id_img` INT NOT NULL , `type` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+select
+SELECT * FROM `groups`,`images`,`contens` WHERE groups.id=images.id_group AND images.id = contens.id AND groups.id = 1;

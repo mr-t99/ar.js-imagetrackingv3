@@ -1,0 +1,39 @@
+.view{
+    display: flex;
+    margin: auto;
+    /* border:1px solid #9ea7d8; */
+    padding: 2px;
+    /* border-radius: 5px; */
+}
+
+.view .v{
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 20px 0px 20px 0px;
+}
+
+.conten{
+    display: flex;
+    margin: auto;
+    /* border:1px solid #9ea7d8; */
+    padding: 2px;
+    /* border-radius: 5px; */
+    padding: 50px 0px 50px 0px;
+    margin-top: 20px;
+}
+
+.upload .fromupload{
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.upload .title{
+    text-align: left;
+    padding-left: 20px;
+}

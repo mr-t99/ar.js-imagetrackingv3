@@ -14,25 +14,26 @@ async function uploadImg(req, res) {
         form.parse(req, async function (err, fields, file) {
             //path tmp trên server
             var object;
-            var path = file.myFile.path;
-            if (file.myFile.name.split('.')[1] !== 'png') {
+            var path = file.file.path;
+            if (file.file.name.split('.')[1] !== 'png') {
+                
                 try {
                     fs.unlinkSync(path)
                     object = {
-                        message: "Hiện tại hệ thống chỉ hỗ hệ ảnh file .PNG, ảnh bạn đang dùng là định dạng ." + file.myFile.name.split('.')[1],
-                        status: 400
+                        message: "Hiện tại hệ thống chỉ hỗ hệ ảnh file .PNG, ảnh bạn đang dùng là định dạng ." + file.file.name.split('.')[1],
+                        status: "error"
                     }
                 } catch (err) {
                     object = {
                         message: "Err",
                         err,
-                        status: 400
+                        status: "error"
                     }
                 }
             } else {
                 //thiết lập path mới cho file
-                var newpath = form.uploadDir + file.myFile.name;
-                var nameNft = file.myFile.name.split('.')[0];
+                var newpath = form.uploadDir + file.file.name;
+                var nameNft = file.file.name.split('.')[0];
 
                 fs.rename(path, newpath, function (err) {
                     if (err) return res.send({
@@ -40,22 +41,15 @@ async function uploadImg(req, res) {
                     });
                 });
                 creatNFT(newpath);
-                const sql = `INSERT INTO images (id, name, link_img, link_nft, id_group) VALUES (NULL, '${file.myFile.name}', '${DOMAIN}/image/${file.myFile.name}', '${DOMAIN}/nft/${nameNft}', ${fields.idGroup})`;
+                const sql = `INSERT INTO images (id, name, link_img, link_nft, id_group) VALUES (NULL, '${file.file.name}', '${DOMAIN}/image/${file.file.name}', '${DOMAIN}/nft/${nameNft}', ${fields.idGroup})`;
                 object = await new Promise(tv => {
                     cn.query(sql, (err, result) => {
                         if (err) return res.status(400).send(err);
                         object = {
                             message: "Bạn đã hoàn thành thiết lập",
-                            info: {
-                                n_image: file.myFile.name,
-                                l_image: `${DOMAIN}/image/${file.myFile.name}`,
-                                l_nft: `${DOMAIN}/nft/${nameNft}`,
-                                idGroup: fields.idGroup,
-                                idImage: result.insertId
-                            },
-                            name: "xxx.png",
+                            name: file.file.name,
                             status: "done",
-                            url: `${DOMAIN}/image/${file.myFile.name}`
+                            url: `${DOMAIN}/image/${file.file.name}`
                         };
                         tv(object);
                     })
@@ -76,15 +70,15 @@ async function uploadVideo(req, res) {
     const object = await new Promise(tv => {
         form.parse(req, async function (err, fields, file) {
             // path tmp trên server
-            var path = file.myFile.path;
+            var path = file.file.path;
             //thiết lập path mới cho file
-            var newpath = form.uploadDir + file.myFile.name;
+            var newpath = form.uploadDir + file.file.name;
             fs.rename(path, newpath, function (err) {
                 if (err) return res.send({
                     message: err
                 });
             });
-            var sql = `INSERT INTO contens (id, name, link_conten, id_img, type) VALUES (NULL, '${file.myFile.name}', '${DOMAIN}/video/${file.myFile.name}', '${fields.idGroup}', '${file.myFile.type}')`
+            var sql = `INSERT INTO contens (id, name, link_conten, id_img, type) VALUES (NULL, '${file.file.name}', '${DOMAIN}/video/${file.file.name}', '${fields.idGroup}', '${file.file.type}')`
             var object = await new Promise(tv => {
                 cn.query(sql, (err) => {
                     if (err) return res.status(400).send(err);

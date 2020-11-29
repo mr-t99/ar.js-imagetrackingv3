@@ -18,7 +18,7 @@ class selectGroup extends Component {
     render() {
         return (
             <div className="select">
-                <h2>Chọn group của bạn</h2>
+                <h2 className="intro">Chọn group của bạn:</h2>
                 <div>
                     <Select defaultValue="Bình chuẩn 1" className="select-after" onChange = {this.changselect}>
                         <Option value="Bình chuẩn 1">Bình chuẩn 1</Option>
@@ -28,7 +28,7 @@ class selectGroup extends Component {
                     </Select>
                 </div>
                 <div className="bt">
-                    <Button type="primary" shape="round" icon={<CaretRightOutlined />} size="large" onClick={this.onClick}>
+                    <Button type="primary" shape="round" icon={<CaretRightOutlined />} size="small" onClick={this.onClick}>
                         Tiếp tục
                     </Button>
                 </div>

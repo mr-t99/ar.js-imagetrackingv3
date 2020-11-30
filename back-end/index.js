@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 var cors = require('cors');
 var bodyParser = require('body-parser');
+require('dotenv').config()
 
 const upload = require('./module/upload');
 const getcontent = require('./module/getcontent');

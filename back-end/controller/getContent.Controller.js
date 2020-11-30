@@ -2,7 +2,7 @@ const fs = require('fs');
 const db = require('../database/db');
 const { query } = require('express');
 const cn = db.createConnection();
-const domain = 'http://localhost:3000'
+const domain = process.env.NODE_API_URL;
 
 function getGroupDatabase(req, res){
     var sql = `SELECT id, name FROM groups`;

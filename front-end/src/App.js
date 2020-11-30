@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.less';
 
 import Home from "./components/home/home";
-import ViewUpload from "./components/upload/selectGroup";
+import ViewUpload from "./components/upload/view";
 import Sl from "./components/upload/selectGroup";
 
 import Logo from "./logo.png";
@@ -10,8 +10,7 @@ import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { Menu } from "antd";
 import { FullscreenOutlined, VerticalAlignTopOutlined, createFromIconfontCN, FacebookOutlined } from "@ant-design/icons";
-const { SubMenu } = Menu;
-
+// const { SubMenu } = Menu;
 
 class App extends Component {
   constructor() {
@@ -21,7 +20,6 @@ class App extends Component {
     }
   }
   handleClick = e => {
-    console.log('click ', e);
     this.setState({ current: e.key });
   };
   iconjs = () => {
@@ -35,7 +33,7 @@ class App extends Component {
   }
 
   render() {
-
+    // console.log(process.env.REACT_APP_API_URL);
     const { current } = this.state;
     return (
       <Router>

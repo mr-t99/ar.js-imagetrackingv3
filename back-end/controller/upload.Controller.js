@@ -3,7 +3,7 @@ const fs = require('fs');
 const creatNFT = require('./creatNFT');
 const db = require('../database/db');
 const cn = db.createConnection();
-const DOMAIN = process.env.FIRA_DB_PSW || 'localhost:4000';
+const DOMAIN = process.env.NODE_API_URL;
 
 async function uploadImg(req, res) {
     var form = new formidable.IncomingForm();

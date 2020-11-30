@@ -1,5 +1,8 @@
 .ant-select.select-after.ant-select-single.ant-select-show-arrow{
-    width: 250px;
+    width: 98%;
+}
+.ant-input{
+    width: 98%;
 }
 .select{
     text-align: center;
@@ -14,4 +17,8 @@
 .bt{
     margin: 5px 0px, 0px, 50px;
     padding: 5px 0px 5px 0px;
+    margin-left: 185px;
+}
+.ant-btn.ant-btn-primary.ant-btn-round.ant-btn-sm{
+    margin: 0px 0px 0px 3px;
 }

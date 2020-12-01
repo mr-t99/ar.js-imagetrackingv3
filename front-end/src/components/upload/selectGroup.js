@@ -37,7 +37,12 @@ class selectGroup extends Component {
             if(this.state.valueInputAddGroup.length===0){
                 alert("Bạn phải nhập tên Nhóm");
             }else{
-
+                const data = async ()=>{
+                    const res = await groupApi.createGroup({name:this.state.valueInputAddGroup});
+                    alert(res.message)
+                    this.props.getId(res.id_group)
+                }
+                data();
             }
         }else{
             this.setState({

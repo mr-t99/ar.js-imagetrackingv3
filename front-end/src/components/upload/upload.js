@@ -37,11 +37,7 @@ class upload extends Component {
             }
         }
     }
-    a(){
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    }
     render() {
-        console.log(this.state);
         return (
             <>
                 <Upload {...this.state} onChange={this.onChange}>

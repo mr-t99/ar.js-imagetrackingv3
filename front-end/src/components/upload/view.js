@@ -9,25 +9,39 @@ class upload extends Component {
         super();
         this.state = {
             idGroup: null,
-            infor:{
-                link_img:null,
-                link_video:null,
-                link_gif:null
+            infor: {
+                link_img: null,
+                link_video: "http://localhost:4000/video/videoplayback.webm",
+                link_gif: "https://cuocsongaz.com/wp-content/uploads/2020/04/40-hinh-anh-dong-de-thuong-kute-cho-powerpoint-dep-nhat-1.gif",
+                id_img: null
             }
         }
         this.getIdGroup = this.getIdGroup.bind(this);
-        this.getDataImg = this.getDataImg.bind(this);
+        this.setDataImg = this.setDataImg.bind(this);
+        this.setDataVideo = this.setDataVideo.bind(this);
+        this.setDataGif = this.setDataGif.bind(this);
     }
     getIdGroup(idGroup) {
         this.setState({
             ...this.state, idGroup: idGroup
         })
     }
-    getDataImg(data){
+    setDataImg(link, id) {
         this.setState({
-            ...this.state, infor:{
-                ...this.state.infor,link_img:data
+            ...this.state, infor: {
+                ...this.state.infor, link_img: link, id_img: id
             }
+        })
+    }
+    setDataVideo(link){
+        console.log(link);
+        this.setState({
+            ...this.state,infor:{...this.state.infor, link_video:link}
+        })
+    }
+    setDataGif(link){
+        this.setState({
+            ...this.state,infor:{...this.state.infor, link_gif:link}
         })
     }
     render() {
@@ -42,36 +56,44 @@ class upload extends Component {
                     <>
                         <div className="view">
                             <div className="v video">
-                                <iframe  width="450" height="300" src="http://localhost:4000/video/videoplayback.webm"></iframe>
+                                <iframe width="450" height="300" src={this.state.infor.link_video}></iframe>
                             </div>
                             <div className="v imgtracking">
-                                {this.state.infor.link_img === null && 
+                                {this.state.infor.link_img === null &&
                                     <>
                                         Chưa tải lên hình ảnh
                                     </>
                                 }
                                 {
-                                    this.state.infor.link_img!==null && 
+                                    this.state.infor.link_img !== null &&
                                     <img width="450" height="300" src={this.state.infor.link_img}></img>
                                 }
                             </div>
+
                             <div className="v infor">
-                                <img width="450" height="300" src="https://cuocsongaz.com/wp-content/uploads/2020/04/40-hinh-anh-dong-de-thuong-kute-cho-powerpoint-dep-nhat-1.gif"></img>
+                                <img width="450" height="300" src={this.state.infor.link_gif}></img>
                             </div>
                         </div>
                         <div className="conten">
-                            <div className="fromupload">
-                                <h3 className="title" getData = {this.getDataImg}>Tải lên video:</h3>
-                                <UploadForm />
-                            </div>
+                            {
+                                this.state.infor.id_img !== null &&
+                                <div className="fromupload">
+                                    <h3 className="title">Tải lên video:</h3>
+                                    <UploadForm type={1} id={this.state.infor.id_img} getData={this.setDataVideo}/>
+                                </div>
+                            }
                             <div className="fromupload">
                                 <h3 className="title" >Tải lên ảnh:</h3>
-                                <UploadForm getData = {this.getDataImg} test="ok" />
+                                <UploadForm getData={this.setDataImg} type={0} idGroup={this.state.idGroup} />
                             </div>
-                            <div className="fromupload">
-                                <h3 className="title" getData = {this.getDataImg}>Tải lên gif:</h3>
-                                <UploadForm />
-                            </div>
+                            {
+                                this.state.infor.id_img !== null &&
+                                <div className="fromupload">
+                                    <h3 className="title" >Tải lên gif:</h3>
+                                    <UploadForm type={2} id={this.state.infor.id_img} getData={this.setDataGif}/>
+                                </div>
+                            }
+
                         </div>
                     </>
                 }

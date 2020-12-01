@@ -41,7 +41,7 @@ async function uploadImg(req, res) {
                     });
                 });
                 creatNFT(newpath);
-                const sql = `INSERT INTO images (id, name, link_img, link_nft, id_group) VALUES (NULL, '${file.file.name}', '${DOMAIN}/image/${file.file.name}', '${DOMAIN}/nft/${nameNft}', ${fields.idGroup})`;
+                const sql = `INSERT INTO images (id, name, link_img, link_nft, id_group) VALUES (NULL, '${file.file.name}', '${DOMAIN}/image/${file.file.name}', '${DOMAIN}/nft/${nameNft}', ${fields.idImg})`;
                 object = await new Promise(tv => {
                     cn.query(sql, (err, result) => {
                         if (err) return res.status(400).send(err);
@@ -49,7 +49,8 @@ async function uploadImg(req, res) {
                             message: "Bạn đã hoàn thành thiết lập",
                             name: file.file.name,
                             status: "done",
-                            url: `${DOMAIN}/image/${file.file.name}`
+                            url: `${DOMAIN}/image/${file.file.name}`,
+                            id_img:result.insertId
                         };
                         tv(object);
                     })
@@ -84,7 +85,7 @@ async function uploadVideo(req, res) {
                     if (err) return res.status(400).send(err);
                     object = {
                         message: "Bạn đã hoàn thành thiết lập",
-                        status: 200
+                        url: `${DOMAIN}/video/${file.file.name}`,
                     };
                     tv(object);
                 })
